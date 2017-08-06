@@ -12,10 +12,11 @@ const argv = yargs.argv;
 
 switch (argv._[0]) {
     case "add":
-        notes.addNote(argv.title,argv.body);
+        notes.addNote(argv.title, argv.body);
         break;
     case "list":
-        notes.getAll();
+        var allNotes = notes.getAll();
+        allNotes.forEach(note => console.log(note));
         break;
     case "read":
         notes.getNote(argv.title);
