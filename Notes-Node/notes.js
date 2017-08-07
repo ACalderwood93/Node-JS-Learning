@@ -10,8 +10,6 @@ module.exports = {
             title,
             body
         };
-
-
         var duplicateNotes = notes.filter((note) => note.title === title);
 
         if (duplicateNotes.length === 0) {
@@ -19,13 +17,9 @@ module.exports = {
             this.saveNotes(notes);
             return note;
         }
-
-
-
     },
-    getAll: () => {
-
-
+    getAll: function () {
+        return this.fetchNotes();
     },
     getNote: (title) => {
         console.log("reading : ", title);
