@@ -12,7 +12,16 @@ const argv = yargs.argv;
 
 switch (argv._[0]) {
     case "add":
-        notes.addNote(argv.title, argv.body);
+        var note = notes.addNote(argv.title, argv.body);
+
+        if (note) {
+            console.log(`${note.title} has been saved`);
+            console.log("---");
+            console.log("Body of Note :", note.body);
+        }
+        else {
+            console.log("Title already exsists")
+        }
         break;
     case "list":
         var allNotes = notes.getAll();
