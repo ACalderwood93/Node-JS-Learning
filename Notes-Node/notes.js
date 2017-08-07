@@ -5,12 +5,29 @@ const fs = require("fs");
 
 module.exports = {
     addNote: (title, body) => {
-        console.log("adding note : ", title, body);
-        fs.writeFile(`./Data/${title}.txt`, body, function (err) {
+        var notes = [];
+        var note = {
+            title,
+            body
+        };
 
-            if (err)
-                console.log("An error has occured writing file : ", title);
-        })
+
+        var s_notes = "";
+
+        try {
+            s_notes = fs.readFileSync("./Data/notes-data.json");
+            notes = JSON.parse(s_notes);
+        }
+        catch (err) {
+            console.log("error reading note");
+        }
+
+        var duplicateNotes = notes.filter((note) => note.title === title);
+
+        if (duplicateNotes.length === 0) {
+            notes.push(note);
+            fs.writeFileSync("./Data/notes-data.json", JSON.stringify(notes))
+        }
 
 
 
