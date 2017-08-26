@@ -1,4 +1,3 @@
-console.log("starting APP");
 
 const fs = require("fs");
 const os = require("os");
@@ -15,9 +14,7 @@ switch (argv._[0]) {
         var note = notes.addNote(argv.title, argv.body);
 
         if (note) {
-            console.log(`${note.title} has been saved`);
-            console.log("---");
-            console.log("Body of Note :", note.body);
+           notes.logNote(note);
         }
         else {
             console.log("Title already exsists")
@@ -25,14 +22,16 @@ switch (argv._[0]) {
         break;
     case "list":
         var allNotes = notes.getAll();
-        allNotes.forEach(note => console.log(note));
+        allNotes.forEach(note => notes.logNote(note));
         break;
     case "read":
-        notes.getNote(argv.title);
+
+        var note = notes.getNote(argv.title)
+        notes.logNote(note);
         break;
     case "remove":
-       notes.removeNote(argv.title)? console.log(`${argv.title} was deleted`) :console.log(`${argv.title} was not found`); 
-        
+        notes.removeNote(argv.title) ? console.log(`${argv.title} was deleted`) : console.log(`${argv.title} was not found`);
+
         break;
     default:
         console.log("Command not recognised");
