@@ -24,10 +24,17 @@ module.exports = {
     getNote: (title) => {
         console.log("reading : ", title);
     },
-    removeNote: (title) => {
-        console.log("removing :", title);
+    removeNote: function (title) {
+
+        var orginalLength = this.fetchNotes().length
+
+        var allNotes = this.fetchNotes().filter((ni) => ni.title != title);
+
+        this.saveNotes(allNotes);
+        return orginalLength != allNotes.length;
+
     },
-    fetchNotes: () => {
+    fetchNotes: function () {
         try {
             var s_notes = fs.readFileSync("./Data/notes-data.json");
             return JSON.parse(s_notes);

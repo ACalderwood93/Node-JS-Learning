@@ -31,7 +31,8 @@ switch (argv._[0]) {
         notes.getNote(argv.title);
         break;
     case "remove":
-        notes.removeNote(argv.title);
+       notes.removeNote(argv.title)? console.log(`${argv.title} was deleted`) :console.log(`${argv.title} was not found`); 
+        
         break;
     default:
         console.log("Command not recognised");
